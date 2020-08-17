@@ -26,7 +26,7 @@
  * File Name: CFcollapse.h
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a3c 27-January-2015
+ * Project Version: 1a4a 10-July-2015
  *
  *******************************************************************************/
 

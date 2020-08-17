@@ -26,7 +26,7 @@
  * File Name: CFmain.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a3c 27-January-2015
+ * Project Version: 1a4a 10-July-2015
  *
  *******************************************************************************/
 
@@ -128,7 +128,7 @@ int main(int argc,char* *argv)
 				
 		if(argumentExists(argc,argv,"-version"))
 		{
-			cout << "OpenCF.exe - Project Version: 1a3c 27-January-2015" << endl;
+			cout << "OpenCF.exe - Project Version: 1a4a 10-July-2015" << endl;
 			exit(1);
 		}
 	}
@@ -144,7 +144,7 @@ int main(int argc,char* *argv)
 			CFblock* firstBlockInList = new CFblock();
 			string fileName = *connectionIter;
 			cout << "fileName = " << fileName << endl;
-			changeDirectoryString(workingFolder);
+			changeDirectory(workingFolder);
 			#ifdef CF_DEBUG_PARSE
 			cout << "main: parseBlocksFromFile()" << endl;			
 			#endif
@@ -155,7 +155,7 @@ int main(int argc,char* *argv)
 			#ifdef CF_DEBUG_PARSE
 			cout << "main: collapseFile()" << endl;
 			#endif
-			changeDirectoryString(tempFolder);			
+			changeDirectory(tempFolder);			
 			if(collapseFile(firstBlockInList, fileName, foldInactive, foldComments, retainPPD))
 			{
 				result = false;
