@@ -26,7 +26,7 @@
  * File Name: CFcollapse.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a3b 27-January-2015
+ * Project Version: 1a3c 27-January-2015
  *
  *******************************************************************************/
 
@@ -88,13 +88,13 @@ bool collapseBlockToFileObject(CFblock* firstBlockInLayer, CFpreprocessorDef* fi
 			{//only write code for 1st level (ie, output file)
 				if(!foldComments)
 				{
-					*outputFileString =* outputFileString + currentBlockInLayer->text;
+					*outputFileString = *outputFileString + currentBlockInLayer->text;
 				}
 				else
 				{
 					if(currentBlockInLayer->commentType == CF_BLOCK_CASE_TYPE_COMMENT_SMALL)
 					{
-						*outputFileString =* outputFileString + CHAR_NEWLINE;	//compensate for the fact char new lines are being recorded in small comments
+						*outputFileString = *outputFileString + CHAR_NEWLINE;	//compensate for the fact char new lines are being recorded in small comments
 					}
 				}
 			}
@@ -105,11 +105,11 @@ bool collapseBlockToFileObject(CFblock* firstBlockInLayer, CFpreprocessorDef* fi
 			{//only write code for 1st level (ie, output file)
 				if(foldComments)
 				{									
-					*outputFileString =* outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, false, NULL);
+					*outputFileString = *outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, false, NULL);
 				}
 				else
 				{
-					*outputFileString =* outputFileString + currentBlockInLayer->text;	//place the "#include _" file inf
+					*outputFileString = *outputFileString + currentBlockInLayer->text;	//place the "#include _" file inf
 				}			
 			}
 			if(!collapseBlockToFileObject(currentBlockInLayer->lower, firstPPDinList, outputFileString, level+1, foldInactive, foldComments, retainPPD))
@@ -128,7 +128,7 @@ bool collapseBlockToFileObject(CFblock* firstBlockInLayer, CFpreprocessorDef* fi
 			{
 				if(level == CF_INCLUDE_LEVEL_FIRST)
 				{//only write code for 1st level (ie, output file)
-					*outputFileString =* outputFileString + currentBlockInLayer->text;
+					*outputFileString = *outputFileString + currentBlockInLayer->text;
 				}			
 				PPDadd(firstPPDinList, currentBlockInLayer->hashTagVariableName);
 			}	
@@ -149,22 +149,22 @@ bool collapseBlockToFileObject(CFblock* firstBlockInLayer, CFpreprocessorDef* fi
 							{
 								if(!foldInactive)
 								{
-									*outputFileString =* outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, false, NULL);
+									*outputFileString = *outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, false, NULL);
 								}
 								else if(retainPPD)
 								{//convert #elif defined/#elif !defined to #if/#ifndef
-									*outputFileString =* outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, true, CF_BLOCK_CASE_TYPE_IFDEF);
+									*outputFileString = *outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, true, CF_BLOCK_CASE_TYPE_IFDEF);
 								}
 							}
 							else 
 							{
 								if(foldComments)
 								{									
-									*outputFileString =* outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, false, NULL);
+									*outputFileString = *outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, false, NULL);
 								}
 								else
 								{
-									*outputFileString =* outputFileString + currentBlockInLayer->text;
+									*outputFileString = *outputFileString + currentBlockInLayer->text;
 								}
 							}
 						}
@@ -197,22 +197,22 @@ bool collapseBlockToFileObject(CFblock* firstBlockInLayer, CFpreprocessorDef* fi
 							{
 								if(!foldInactive)
 								{
-									*outputFileString =* outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, false, NULL);
+									*outputFileString = *outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, false, NULL);
 								}
 								else if(retainPPD)
 								{//convert #elif defined/#elif !defined to #if/#ifndef
-									*outputFileString =* outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, true, CF_BLOCK_CASE_TYPE_IFNDEF);
+									*outputFileString = *outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, true, CF_BLOCK_CASE_TYPE_IFNDEF);
 								}
 							}
 							else 
 							{
 								if(foldComments)
 								{
-									*outputFileString =* outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, false, NULL);
+									*outputFileString = *outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, false, NULL);
 								}
 								else
 								{
-									*outputFileString =* outputFileString + currentBlockInLayer->text;
+									*outputFileString = *outputFileString + currentBlockInLayer->text;
 								}
 							}
 						}
@@ -236,17 +236,17 @@ bool collapseBlockToFileObject(CFblock* firstBlockInLayer, CFpreprocessorDef* fi
 							if(retainPPD)
 							{//convert #else to #if/#ifndef
 								currentBlockInLayer->hashTagVariableName = retainPPDelseStatementTagVariableName;	//temporarily set this value
-								*outputFileString =* outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, true, retainPPDelseStatementTagID);
+								*outputFileString = *outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, true, retainPPDelseStatementTagID);
 							}
 							else
 							{											
 								if(foldComments)
 								{
-									*outputFileString =* outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, false, NULL);
+									*outputFileString = *outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, false, NULL);
 								}
 								else
 								{
-									*outputFileString =* outputFileString + currentBlockInLayer->text;
+									*outputFileString = *outputFileString + currentBlockInLayer->text;
 								}
 							}
 						}
@@ -266,11 +266,11 @@ bool collapseBlockToFileObject(CFblock* firstBlockInLayer, CFpreprocessorDef* fi
 					{//only write code for 1st level (ie, output file)
 						if(foldComments)
 						{
-							*outputFileString =* outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, false, NULL);
+							*outputFileString = *outputFileString + reworkCodeBlockHashTag(currentBlockInLayer, foldComments, false, NULL);
 						}
 						else
 						{
-							*outputFileString =* outputFileString + currentBlockInLayer->text;
+							*outputFileString = *outputFileString + currentBlockInLayer->text;
 						}
 					}
 				}
@@ -285,7 +285,7 @@ bool collapseBlockToFileObject(CFblock* firstBlockInLayer, CFpreprocessorDef* fi
 			{
 				if(level == CF_INCLUDE_LEVEL_FIRST)
 				{//only write code for 1st level (ie, output file)
-					*outputFileString =* outputFileString + currentBlockInLayer->text;
+					*outputFileString = *outputFileString + currentBlockInLayer->text;
 				}			
 				PPDdeactivate(firstPPDinList, currentBlockInLayer->hashTagVariableName);
 			}			
@@ -298,7 +298,7 @@ bool collapseBlockToFileObject(CFblock* firstBlockInLayer, CFpreprocessorDef* fi
 		{
 			if(level == CF_INCLUDE_LEVEL_FIRST)
 			{//only write code for 1st level (ie, output file)
-				*outputFileString =* outputFileString + currentBlockInLayer->text;
+				*outputFileString = *outputFileString + currentBlockInLayer->text;
 			}
 		}
 		else
