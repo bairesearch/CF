@@ -23,7 +23,7 @@
  * File Name: CFmain.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2013 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a1a 20-July-2013
+ * Project Version: 1a1b 22-July-2013
  *
  *******************************************************************************/
 
@@ -71,7 +71,7 @@ int main(int argc,char **argv)
 	bool passInputReq = false;
 	vector<string> inputFileNamesVector;	
 	
-	#ifdef CF_DEBUG
+	#ifdef CF_DEBUG_ALLOW_SAME_OUTPUT_TEST
 	if(argumentExists(argc, argv, string("-i")))
 	#else
 	if(argumentExists(argc, argv, string("-i")) && (argumentExists(argc, argv, string("-foldComments")) || argumentExists(argc, argv, string("-foldInactive"))))
@@ -124,14 +124,14 @@ int main(int argc,char **argv)
 				
 		if(argumentExists(argc,argv,"-version"))
 		{
-			cout << "OpenCF.exe - Project Version: 1a1a 20-July-2013" << endl;
+			cout << "OpenCF.exe - Project Version: 1a1b 22-July-2013" << endl;
 			exit(1);
 		}
 	}
 
 	if(passInputReq)
 	{	
-		#ifdef CF_DEBUG
+		#ifdef CF_DEBUG_PARSE
 		cout << "workingFolder = " << workingFolder << endl;
 		cout << "tempFolder = " << tempFolder << endl;
 		#endif		
@@ -139,18 +139,16 @@ int main(int argc,char **argv)
 		{
 			CFblock * firstBlockInList = new CFblock();
 			string fileName = *connectionIter;
-			#ifdef CF_DEBUG
 			cout << "fileName = " << fileName << endl;
-			#endif			
 			changeDirectory(workingFolder);
-			#ifdef CF_DEBUG
+			#ifdef CF_DEBUG_PARSE
 			cout << "main: parseBlocksFromFile()" << endl;			
 			#endif
 			if(parseBlocksFromFile(firstBlockInList, fileName, CF_INCLUDE_LEVEL_FIRST))
 			{
 				result = false;
 			}
-			#ifdef CF_DEBUG
+			#ifdef CF_DEBUG_PARSE
 			cout << "main: collapseFile()" << endl;
 			#endif
 			changeDirectory(tempFolder);			
@@ -172,8 +170,13 @@ int main(int argc,char **argv)
 		/*cout << "Small (//) comments are ignored immediately after preprocessor definition statements (they are not folded)" << endl;*/
 		cout << "Multiline comments are not supported immediately after preprocessor definition statements (on the same line)" << endl;			
 		cout << "CF requires include/header files that wish to be parsed to to be delimited with " " rather than < >" << endl;
-		cout << "CF requires a single space between #tags and preprocessor variables e.g. #include \"this.h\"" << endl;
+		cout << "CF requires a single space between #tags and preprocessor variables e.g. #include \"this.h\", #ifdef X, #define Y, etc" << endl;
 		cout << "Ensure that the temp (output) folder is clear of all output files" << endl;
+		cout << "CF does not support \"if defined\" logic (eg multiple if defined statements on a single line)" << endl;
+		cout << "CF requires all files to be the operating system text format (eg UNIX/ASCII)" << endl;	
+		cout << "CF requires all #tags to be properly defined (eg #endif; is illegal)" << endl;
+		cout << "CF does not support external (library) preprocessor defs, eg #ifdef __FREEGLUT_EXT_H__" << endl;
+		cout << "CF requires all relevant preprocessor defs to be defined within the scope (ie necessary preprocessor definitions cannot be inherited from files from which they are being included, they must be defined within their own include file scope)" << endl;
 		cout << "****************************" << endl;
 		exit(0);
 	}

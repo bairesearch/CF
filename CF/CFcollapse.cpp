@@ -23,7 +23,7 @@
  * File Name: CFcollapse.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2013 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a1a 20-July-2013
+ * Project Version: 1a1b 22-July-2013
  *
  *******************************************************************************/
 
@@ -64,9 +64,16 @@ bool collapseBlockToFileObject(CFblock * firstBlockInLayer, CFpreprocessorDef * 
 		
 	CFblock * currentBlockInLayer = firstBlockInLayer;
 	
-
 	while(currentBlockInLayer->next != NULL)
 	{
+		#ifdef CF_DEBUG_COLLAPSE
+		for(int i=0; i<level; i++)
+		{
+			cout << "\t";
+		}
+		cout << "\033[1;34m collapseBlockToFileObject: hashTag = " << currentBlockInLayer->hashTag << ", varName = " <<  currentBlockInLayer->hashTagVariableName << ", isActive = " << isPPDactive(firstPPDinList, currentBlockInLayer->hashTagVariableName) << " \033[0m" << endl;
+		#endif	
+		
 		if(currentBlockInLayer->type == CF_BLOCK_TYPE_UNDEFINED)
 		{
 			cout << "collapseBlockToFileObject() error: (currentBlockInLayer->type == CF_BLOCK_TYPE_UNDEFINED)" << endl;
@@ -176,7 +183,7 @@ bool collapseBlockToFileObject(CFblock * firstBlockInLayer, CFpreprocessorDef * 
 					retainPPDelseStatementTagID = CF_BLOCK_CASE_TYPE_IFDEF;
 					retainPPDelseStatementTagVariableName = currentBlockInLayer->hashTagVariableName;			
 				}			
-				if(!foldInactive || (ifCaseStillTrying && !isPPDactive(firstPPDinList, currentBlockInLayer->hashTagVariableName)))
+				if(!foldInactive || (ifCaseStillTrying && !isPPDactive(firstPPDinList, currentBlockInLayer->hashTagVariableName)) || specialCaseBlockAlwaysRetainTags)
 				{
 					if(!foldInactive || retainPPD || specialCaseBlockAlwaysRetainTags)
 					{

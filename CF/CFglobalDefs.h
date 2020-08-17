@@ -23,7 +23,7 @@
  * File Name: CFglobalDefs.h
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2013 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a1a 20-July-2013
+ * Project Version: 1a1b 22-July-2013
  *
  *******************************************************************************/
 
@@ -32,7 +32,9 @@
 
 #include "SHAREDglobalDefs.h"
 
-//#define CF_DEBUG
+//#define CF_DEBUG_PARSE
+//#define CF_DEBUG_COLLAPSE
+#define CF_DEBUG_ALLOW_SAME_OUTPUT_TEST
 #define CF_INCLUDE_LEVEL_FIRST (1)
 #define CF_DEFAULT_OUTPUT_FOLDER_RELATIVE_PATH "/output"
 #define CF_SPECIAL_CASE_BLOCK_ALWAYS_RETAIN_TAGS_HEADER_IFNDEF

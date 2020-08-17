@@ -23,7 +23,7 @@
  * File Name: CFparse.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2013 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a1a 20-July-2013
+ * Project Version: 1a1b 22-July-2013
  *
  *******************************************************************************/
 
@@ -31,7 +31,7 @@
 
 bool parseBlocksFromFile(CFblock * firstBlockInFile, string parseFileName, int level)
 {
-	#ifdef CF_DEBUG
+	#ifdef CF_DEBUG_PARSE
 	for(int i=0; i<level; i++)
 	{
 		cout << "\t";
@@ -64,7 +64,7 @@ bool parseBlocksFromFile(CFblock * firstBlockInFile, string parseFileName, int l
 		}
 	}
 
-	#ifdef CF_DEBUG
+	#ifdef CF_DEBUG_PARSE
 	for(int i=0; i<level; i++)
 	{
 		cout << "\t";
@@ -77,7 +77,7 @@ bool parseBlocksFromFile(CFblock * firstBlockInFile, string parseFileName, int l
 
 CFblock * parseTextBlock(ifstream * parseFileObject, CFblock * firstBlockInLayer, int level, int * lineCount, bool * returnUponHashTagExitStatement)
 {
-	#ifdef CF_DEBUG
+	#ifdef CF_DEBUG_PARSE
 	for(int i=0; i<level; i++)
 	{
 		cout << "\t";
@@ -103,7 +103,7 @@ CFblock * parseTextBlock(ifstream * parseFileObject, CFblock * firstBlockInLayer
 		{		
 			charCount++;
 			currentLine = currentLine + c;
-			#ifdef CF_DEBUG
+			#ifdef CF_DEBUG_PARSE
 			cout << c;
 			#endif
 			if(c == CHAR_FORWARDSLASH)
@@ -111,7 +111,7 @@ CFblock * parseTextBlock(ifstream * parseFileObject, CFblock * firstBlockInLayer
 				char tempChar;
 				if(parseFileObject->get(tempChar))
 				{
-					#ifdef CF_DEBUG
+					#ifdef CF_DEBUG_PARSE
 					cout << tempChar;
 					#endif
 					currentLine = currentLine + tempChar;	//change from c to tempChar 22 July 2013
@@ -225,7 +225,7 @@ CFblock * parseTextBlock(ifstream * parseFileObject, CFblock * firstBlockInLayer
 					}
 					else if(getSupportedHashTagID(hashTag, hashTagArrayWithVariables, CF_HASH_TAG_WITH_VARIABLES_NUMBER_OF_TYPES) != CF_BLOCK_CASE_TYPE_UNDEFINED)
 					{//#define, #undef, #ifdef, #ifndef, #elif defined, #elif !defined
-						#ifdef CF_DEBUG
+						#ifdef CF_DEBUG_PARSE
 						//cout << "hashTag = " << hashTag << endl;
 						#endif
 
@@ -234,7 +234,7 @@ CFblock * parseTextBlock(ifstream * parseFileObject, CFblock * firstBlockInLayer
 					}
 					else if(getSupportedHashTagID(hashTag, hashTagArrayWithoutVariables, CF_HASH_TAG_WITHOUT_VARIABLES_NUMBER_OF_TYPES) != CF_BLOCK_CASE_TYPE_UNDEFINED)
 					{//#else, #endif
-						#ifdef CF_DEBUG
+						#ifdef CF_DEBUG_PARSE
 						//cout << "hashTag = " << hashTag << endl;
 						#endif
 
@@ -256,7 +256,7 @@ CFblock * parseTextBlock(ifstream * parseFileObject, CFblock * firstBlockInLayer
 				}
 				else if(c == CHAR_NEWLINE)
 				{
-					#ifdef CF_DEBUG
+					#ifdef CF_DEBUG_PARSE
 					//cout << "\nhashTag = " << hashTag << endl;						
 					#endif
 					if(getSupportedHashTagID(hashTag, hashTagArrayWithoutVariables, CF_HASH_TAG_WITHOUT_VARIABLES_NUMBER_OF_TYPES) != CF_BLOCK_CASE_TYPE_UNDEFINED)
@@ -285,7 +285,7 @@ CFblock * parseTextBlock(ifstream * parseFileObject, CFblock * firstBlockInLayer
 			{
 				if(isWhiteSpace(c) || (c == CHAR_NEWLINE))
 				{
-					#ifdef CF_DEBUG
+					#ifdef CF_DEBUG_PARSE
 					//cout << "\nhashTagVariableName = " << hashTagVariableName << endl;
 					#endif
 					
@@ -336,7 +336,7 @@ CFblock * parseTextBlock(ifstream * parseFileObject, CFblock * firstBlockInLayer
 		}			
 	}	
 			
-	#ifdef CF_DEBUG
+	#ifdef CF_DEBUG_PARSE
 	for(int i=0; i<level; i++)
 	{
 		cout << "\t";
@@ -351,7 +351,7 @@ CFblock * readLargeComment(ifstream * parseFileObject, CFblock * firstBlockInCom
 {	
 	CFblock * currentBlockInLayer = firstBlockInComment;
 	/*
-	#ifdef CF_DEBUG
+	#ifdef CF_DEBUG_PARSE
 	for(int i=0; i<level; i++)
 	{
 		cout << "\t";
@@ -369,7 +369,7 @@ CFblock * readLargeComment(ifstream * parseFileObject, CFblock * firstBlockInCom
 		if(parseFileObject->get(c))
 		{
 			currentLine = currentLine + c;
-			#ifdef CF_DEBUG
+			#ifdef CF_DEBUG_PARSE
 			cout << c;
 			#endif
 
@@ -386,7 +386,7 @@ CFblock * readLargeComment(ifstream * parseFileObject, CFblock * firstBlockInCom
 					if(parseFileObject->get(c))
 					{
 						currentLine = currentLine + c;
-						#ifdef CF_DEBUG
+						#ifdef CF_DEBUG_PARSE
 						cout << c;
 						#endif
 
@@ -429,7 +429,7 @@ CFblock * readLargeComment(ifstream * parseFileObject, CFblock * firstBlockInCom
 	}	
 	
 	/*
-	#ifdef CF_DEBUG
+	#ifdef CF_DEBUG_PARSE
 	for(int i=0; i<level; i++)
 	{
 		cout << "\t";
@@ -445,7 +445,7 @@ CFblock * readSmallComment(ifstream * parseFileObject, CFblock * firstBlockInCom
 	CFblock * currentBlockInLayer = firstBlockInComment;
 
 	/*
-	#ifdef CF_DEBUG
+	#ifdef CF_DEBUG_PARSE
 	for(int i=0; i<level; i++)
 	{
 		cout << "\t";
@@ -463,7 +463,7 @@ CFblock * readSmallComment(ifstream * parseFileObject, CFblock * firstBlockInCom
 		if(parseFileObject->get(c))
 		{
 			currentLine = currentLine + c;
-			#ifdef CF_DEBUG
+			#ifdef CF_DEBUG_PARSE
 			cout << c;
 			#endif
 
@@ -497,7 +497,7 @@ CFblock * readSmallComment(ifstream * parseFileObject, CFblock * firstBlockInCom
 void waitForNewLine(ifstream * parseFileObject, int level, int * lineCount, string * currentLine, string * currentTextBlock, bool writeToTextBlock, bool * parsingTextBlock)
 {
 	/*
-	#ifdef CF_DEBUG
+	#ifdef CF_DEBUG_PARSE
 	for(int i=0; i<level; i++)
 	{
 		cout << "\t";
@@ -512,7 +512,7 @@ void waitForNewLine(ifstream * parseFileObject, int level, int * lineCount, stri
 		if(parseFileObject->get(c))
 		{
 			*currentLine = *currentLine + c;
-			#ifdef CF_DEBUG
+			#ifdef CF_DEBUG_PARSE
 			cout << c;
 			#endif
 
@@ -550,7 +550,7 @@ CFblock * processHashTagStatement(ifstream * parseFileObject, CFblock * currentB
 	*currentLine = "";					
 	if(hashTagID == CF_BLOCK_CASE_TYPE_INCLUDE)
 	{
-		#ifdef CF_DEBUG
+		#ifdef CF_DEBUG_PARSE
 		for(int i=0; i<level; i++)
 		{
 			cout << "\t";
@@ -579,7 +579,7 @@ CFblock * processHashTagStatement(ifstream * parseFileObject, CFblock * currentB
 		currentHashTagBlock->type = CF_BLOCK_TYPE_CASE;
 		if(getSupportedHashTagID(*hashTag, hashTagArrayDefinitions, CF_HASH_TAG_CASE_DEFINITIONS_NUMBER_OF_TYPES)  != CF_BLOCK_CASE_TYPE_UNDEFINED)
 		{//#define, #undef
-			#ifdef CF_DEBUG
+			#ifdef CF_DEBUG_PARSE
 			for(int i=0; i<level; i++)
 			{
 				cout << "\t";
@@ -598,7 +598,7 @@ CFblock * processHashTagStatement(ifstream * parseFileObject, CFblock * currentB
 		}
 		else if(getSupportedHashTagID(*hashTag, hashTagArrayEnter, CF_HASH_TAG_CASE_ENTER_NUMBER_OF_TYPES)  != CF_BLOCK_CASE_TYPE_UNDEFINED)
 		{//#ifdef, #ifndef,
-			#ifdef CF_DEBUG
+			#ifdef CF_DEBUG_PARSE
 			for(int i=0; i<level; i++)
 			{
 				cout << "\t";
@@ -613,9 +613,9 @@ CFblock * processHashTagStatement(ifstream * parseFileObject, CFblock * currentB
 				currentHashTagBlock->lower = new CFblock();
 				//currentHashTagBlock->next = new CFblock();
 				bool ifStatementReturnedUponHashTagExitStatement = false;
-				currentHashTagBlock->next = parseTextBlock(parseFileObject, currentHashTagBlock->lower, (level+1), lineCount, &ifStatementReturnedUponHashTagExitStatement);		//this should be (level+0) - temporarily changed for debug
+				currentHashTagBlock->next = parseTextBlock(parseFileObject, currentHashTagBlock->lower, (level+1), lineCount, &ifStatementReturnedUponHashTagExitStatement);		//this should be (level+0) - temporarily changed for CF_DEBUG_PARSE
 				currentHashTagBlock = currentHashTagBlock->next;
-				#ifdef CF_DEBUG
+				#ifdef CF_DEBUG_PARSE
 				for(int i=0; i<level; i++)
 				{
 					cout << "\t";
