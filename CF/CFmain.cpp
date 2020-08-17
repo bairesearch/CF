@@ -2,9 +2,8 @@
  * 
  * This file is part of BAIPROJECT.
  * 
- * BAIPROJECT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License version 3
- * only, as published by the Free Software Foundation. The use of
+ * BAIPROJECT is licensed under the GNU Affero General Public License
+ * version 3, as published by the Free Software Foundation. The use of
  * intermediary programs or interfaces including file i/o is considered
  * remote network interaction. This does not imply such arrangements
  * do not constitute derivative works.
@@ -26,7 +25,7 @@
  * File Name: CFmain.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1b1b 11-August-2016
+ * Project Version: 1b2a 16-March-2017
  *
  *******************************************************************************/
 
@@ -35,7 +34,7 @@
 #include "CFparse.h"
 #include "CFcollapse.h"
 #include "CFclass.h"
-#include "SHAREDvars.h"
+#include "SHAREDvars.hpp"
 
 #ifndef LINUX
 	#include <windows.h>
@@ -46,17 +45,17 @@ static char errmessage[] = "Usage:  OpenCF.exe [options]"
 "\n"
 "\n\twhere options are any of the following"
 "\n"
-"\n\t-i [string]                     : list of input files to be folded (eg PROJECT*.cpp PROJECT*.h main.cpp main.h operations.cpp operations.h)"
+"\n\t-i [string]                     : list of input files to be folded (eg PROJECT*.cpp PROJECT*.hpp)"
 "\n\t-foldComments                   : fold comments"
 "\n\t-foldInactive                   : fold inactive code blocks based on preprocessor definitions"
-"\n\t-foldSpecific [string]  : fold specific inactive code blocks based on preprocessor definitions"
+"\n\t-foldSpecific [string]          : fold specific inactive code blocks based on preprocessor definitions"
 "\n\t-retainPPD                      : retain code block preprocessor definitions when folding"
 "\n"
-"\n\t-workingfolder [string] : working directory name for input files (def: same as exe)"
+"\n\t-inputfolder [string]     : input directory name for input files (def: same as exe)"
 /*"\n\t-exefolder [string]     : exe directory name for executables; OpenCF.exe (def: same as exe)"*/
-"\n\t-tempfolder [string]    : temp directory name for temporary and output files (def: same as exe/output)"
+"\n\t-outputfolder [string]    : output directory name for temporary and output files (def: same as exe/output)"
 "\n"
-"\n\t-version                : print version"
+"\n\t-version                 : print version"
 "\n"
 "\n\tThe program permanently folds inactive code blocks based on active preprocessor definitions."
 "\n"
@@ -65,7 +64,7 @@ static char errmessage[] = "Usage:  OpenCF.exe [options]"
 
 
 		
-int main(int argc, char** argv)
+int main(const int argc, const char** argv)
 {
 	bool result = false;
 	
@@ -79,80 +78,80 @@ int main(int argc, char** argv)
 	vector<string> inputFileNamesVector;	
 	
 	#ifdef CF_DEBUG_ALLOW_SAME_OUTPUT_TEST
-	if(argumentExists(argc, argv, string("-i")))
+	if(SHAREDvarsClass().argumentExists(argc, argv, string("-i")))
 	#else
-	if(argumentExists(argc, argv, string("-i")) && (argumentExists(argc, argv, string("-foldComments")) || argumentExists(argc, argv, string("-foldInactive"))))
+	if(SHAREDvarsClass().argumentExists(argc, argv, string("-i")) && (SHAREDvarsClass().argumentExists(argc, argv, string("-foldComments")) || SHAREDvarsClass().argumentExists(argc, argv, string("-foldInactive"))))
 	#endif
 	{
 		passInputReq = true;
 		//getStringArgument(argc,argv,"-i");
-		getStringArrayArgument(argc, argv, "-i", &inputFileNamesVector);
+		SHAREDvarsClass().getStringArrayArgument(argc, argv, "-i", &inputFileNamesVector);
 
-		if(argumentExists(argc, argv, string("-foldComments")))
+		if(SHAREDvarsClass().argumentExists(argc, argv, string("-foldComments")))
 		{
 			foldComments = true;
 		}
-		if(argumentExists(argc, argv, string("-foldInactive")))
+		if(SHAREDvarsClass().argumentExists(argc, argv, string("-foldInactive")))
 		{
 			foldInactive = true;
 		}
-		if(argumentExists(argc, argv, string("-foldSpecific")))
+		if(SHAREDvarsClass().argumentExists(argc, argv, string("-foldSpecific")))
 		{
 			foldSpecific = true;
-			foldSpecificBlockNameSubset = getStringArgument(argc, argv, string("-foldSpecific"));
+			foldSpecificBlockNameSubset = SHAREDvarsClass().getStringArgument(argc, argv, string("-foldSpecific"));
 		}
-		if(argumentExists(argc, argv, string("-retainPPD")))
+		if(SHAREDvarsClass().argumentExists(argc, argv, string("-retainPPD")))
 		{
 			retainPPD = true;
 		}
 				
-		string currentFolder = getCurrentDirectory();	
-		if(argumentExists(argc, argv, string("-workingfolder")))
+		string currentFolder = SHAREDvarsClass().getCurrentDirectory();	
+		if(SHAREDvarsClass().argumentExists(argc, argv, string("-inputfolder")))
 		{
-			workingFolder = getStringArgument(argc, argv, string("-workingfolder"));
+			inputFolder = SHAREDvarsClass().getStringArgument(argc, argv, string("-inputfolder"));
 		}
 		else
 		{
-			workingFolder = currentFolder;
+			inputFolder = currentFolder;
 		}
 		/*
-		if(argumentExists(argc, argv, string("-exefolder")))
+		if(SHAREDvarsClass().argumentExists(argc, argv, string("-exefolder")))
 		{
-			exeFolder = getStringArgument(argc, argv, string("-exefolder"));
+			exeFolder = SHAREDvarsClass().getStringArgument(argc, argv, string("-exefolder"));
 		}
 		else
 		{
 			exeFolder = currentFolder;
 		}
 		*/
-		if(argumentExists(argc, argv, string("-tempfolder")))
+		if(SHAREDvarsClass().argumentExists(argc, argv, string("-outputfolder")))
 		{
-			tempFolder = getStringArgument(argc, argv, string("-tempfolder"));
+			outputFolder = SHAREDvarsClass().getStringArgument(argc, argv, string("-outputfolder"));
 		}
 		else
 		{
-			tempFolder = currentFolder + CF_DEFAULT_OUTPUT_FOLDER_RELATIVE_PATH;
+			outputFolder = currentFolder + CF_DEFAULT_OUTPUT_FOLDER_RELATIVE_PATH;
 		}
 				
-		if(argumentExists(argc,argv,"-version"))
+		if(SHAREDvarsClass().argumentExists(argc, argv, "-version"))
 		{
-			cout << "OpenCF.exe - Project Version: 1b1b 11-August-2016" << endl;
-			exit(1);
+			cout << "OpenCF.exe - Project Version: 1b2a 16-March-2017" << endl;
+			exit(EXIT_OK);
 		}
 	}
 
 	if(passInputReq)
 	{	
 		#ifdef CF_DEBUG_PARSE
-		cout << "workingFolder = " << workingFolder << endl;
-		cout << "tempFolder = " << tempFolder << endl;
+		cout << "inputFolder = " << inputFolder << endl;
+		cout << "outputFolder = " << outputFolder << endl;
 		#endif		
 		for(vector<string>::iterator connectionIter = inputFileNamesVector.begin(); connectionIter != inputFileNamesVector.end(); connectionIter++)
 		{
 			CFblock* firstBlockInList = new CFblock();
 			string fileName = *connectionIter;
 			cout << "fileName = " << fileName << endl;
-			changeDirectory(workingFolder);
+			SHAREDvarsClass().changeDirectory(inputFolder);
 			#ifdef CF_DEBUG_PARSE
 			cout << "main: parseBlocksFromFile()" << endl;			
 			#endif
@@ -163,7 +162,7 @@ int main(int argc, char** argv)
 			#ifdef CF_DEBUG_PARSE
 			cout << "main: collapseFile()" << endl;
 			#endif
-			changeDirectory(tempFolder);			
+			SHAREDvarsClass().changeDirectory(outputFolder);			
 			if(collapseFile(firstBlockInList, fileName, foldInactive, foldComments, retainPPD, foldSpecific, foldSpecificBlockNameSubset))
 			{
 				result = false;
@@ -190,7 +189,7 @@ int main(int argc, char** argv)
 		cout << "CF does not support external (library) preprocessor defs, eg #ifdef __FREEGLUT_EXT_H__" << endl;
 		cout << "CF requires all relevant preprocessor defs to be defined within the scope (ie necessary preprocessor definitions cannot be inherited from files from which they are being included, they must be defined within their own include file scope)" << endl;
 		cout << "****************************" << endl;
-		exit(0);
+		exit(EXIT_ERROR);
 	}
 }
 

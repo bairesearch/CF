@@ -2,9 +2,8 @@
  * 
  * This file is part of BAIPROJECT.
  * 
- * BAIPROJECT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License version 3
- * only, as published by the Free Software Foundation. The use of
+ * BAIPROJECT is licensed under the GNU Affero General Public License
+ * version 3, as published by the Free Software Foundation. The use of
  * intermediary programs or interfaces including file i/o is considered
  * remote network interaction. This does not imply such arrangements
  * do not constitute derivative works.
@@ -26,7 +25,7 @@
  * File Name: CFparse.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1b1b 11-August-2016
+ * Project Version: 1b2a 16-March-2017
  *
  *******************************************************************************/
 
@@ -198,7 +197,7 @@ CFblock* parseTextBlock(ifstream* parseFileObject, CFblock* firstBlockInLayer, i
 			}
 			else if(readingHashTagPreceedingWhiteSpace)
 			{
-				if(isWhiteSpace(c) || (c == CHAR_TAB))
+				if(SHAREDvarsClass().isWhiteSpace(c) || (c == CHAR_TAB))
 				{
 
 				}
@@ -219,7 +218,7 @@ CFblock* parseTextBlock(ifstream* parseFileObject, CFblock* firstBlockInLayer, i
 			else if(readingHashTag)
 			{
 				//cout << "readingHashTag: " << c << endl;			
-				if(isWhiteSpace(c))
+				if(SHAREDvarsClass().isWhiteSpace(c))
 				{
 					//cout << "\nhashTag = " << hashTag << endl;
 					if(hashTag == CF_HASH_TAG_SPECIAL_CASE_ELIF)
@@ -287,13 +286,13 @@ CFblock* parseTextBlock(ifstream* parseFileObject, CFblock* firstBlockInLayer, i
 			}
 			else if(readingHashTagVariableName)
 			{
-				if(isWhiteSpace(c) || (c == CHAR_NEWLINE))
+				if(SHAREDvarsClass().isWhiteSpace(c) || (c == CHAR_NEWLINE))
 				{
 					#ifdef CF_DEBUG_PARSE
 					//cout << "\nhashTagVariableName = " << hashTagVariableName << endl;
 					#endif
 					
-					if(isWhiteSpace(c))
+					if(SHAREDvarsClass().isWhiteSpace(c))
 					{//parse to end of line for consistency
 						waitForNewLine(parseFileObject, level, lineCount, &currentLine, NULL, false, &parsingTextBlock);
 					}
