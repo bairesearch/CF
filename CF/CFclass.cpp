@@ -1,32 +1,33 @@
 /*******************************************************************************
  * 
- * This file is part of BAIPROJECT.
+ * No License
  * 
- * BAIPROJECT is licensed under the GNU Affero General Public License
- * version 3, as published by the Free Software Foundation. The use of
- * intermediary programs or interfaces including file i/o is considered
- * remote network interaction. This does not imply such arrangements
- * do not constitute derivative works.
+ * This work is under exclusive copyright (c) Baxter AI (baxterai.com). 
+ * Nobody else can use, copy, distribute, or modify this work without being 
+ * at risk of take-downs, shake-downs, or litigation. 
  * 
- * BAIPROJECT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License version 3 for more details
- * (a copy is included in the LICENSE file that accompanied this code).
+ * By publishing this source code in a public repository on GitHub, Terms of 
+ * Service have been accepted by which Baxter AI have allowed others to view 
+ * and fork their repository.
  * 
- * You should have received a copy of the GNU Affero General Public License
- * version 3 along with BAIPROJECT.  If not, see <http://www.gnu.org/licenses/>
- * for a copy of the AGPLv3 License.
+ * If you find software that doesn't have a license, that generally means you 
+ * have no permission from the creators of the software to use, modify, or 
+ * share the software. Although a code host such as GitHub may allow you to 
+ * view and fork the code, this does not imply that you are permitted to use, 
+ * modify, or share the software for any purpose.
+ *
+ * This notice has been derived from https://choosealicense.com/no-permission 
+ * (https://web.archive.org/web/20180312144938/https://choosealicense.com/no-permission)
  * 
  *******************************************************************************/
 
 /*******************************************************************************
  *
  * File Name: CFclass.cpp
- * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
+ * Author: Richard Bruce Baxter - Copyright (c) 2005-2018 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1b2a 16-March-2017
- *
+ * Project Version: 1c2a 15-March-2018
+ * /
  *******************************************************************************/
 
 

@@ -1,32 +1,33 @@
 /*******************************************************************************
  * 
- * This file is part of BAIPROJECT.
+ * No License
  * 
- * BAIPROJECT is licensed under the GNU Affero General Public License
- * version 3, as published by the Free Software Foundation. The use of
- * intermediary programs or interfaces including file i/o is considered
- * remote network interaction. This does not imply such arrangements
- * do not constitute derivative works.
+ * This work is under exclusive copyright (c) Baxter AI (baxterai.com). 
+ * Nobody else can use, copy, distribute, or modify this work without being 
+ * at risk of take-downs, shake-downs, or litigation. 
  * 
- * BAIPROJECT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License version 3 for more details
- * (a copy is included in the LICENSE file that accompanied this code).
+ * By publishing this source code in a public repository on GitHub, Terms of 
+ * Service have been accepted by which Baxter AI have allowed others to view 
+ * and fork their repository.
  * 
- * You should have received a copy of the GNU Affero General Public License
- * version 3 along with BAIPROJECT.  If not, see <http://www.gnu.org/licenses/>
- * for a copy of the AGPLv3 License.
+ * If you find software that doesn't have a license, that generally means you 
+ * have no permission from the creators of the software to use, modify, or 
+ * share the software. Although a code host such as GitHub may allow you to 
+ * view and fork the code, this does not imply that you are permitted to use, 
+ * modify, or share the software for any purpose.
+ *
+ * This notice has been derived from https://choosealicense.com/no-permission 
+ * (https://web.archive.org/web/20180312144938/https://choosealicense.com/no-permission)
  * 
  *******************************************************************************/
 
 /*******************************************************************************
  *
  * File Name: CFmain.cpp
- * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
+ * Author: Richard Bruce Baxter - Copyright (c) 2005-2018 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1b2a 16-March-2017
- *
+ * Project Version: 1c2a 15-March-2018
+ * /
  *******************************************************************************/
 
 
@@ -135,7 +136,7 @@ int main(const int argc, const char** argv)
 				
 		if(SHAREDvarsClass().argumentExists(argc, argv, "-version"))
 		{
-			cout << "OpenCF.exe - Project Version: 1b2a 16-March-2017" << endl;
+			cout << "OpenCF.exe - Project Version: 1c2a 15-March-2018" << endl;
 			exit(EXIT_OK);
 		}
 	}
@@ -171,24 +172,24 @@ int main(const int argc, const char** argv)
 	}
 	else
 	{
-		printf(errmessage);
-		cout << "**** Known Limitations:* ****" << endl;
-		cout << "all c/cpp and h/hpp files that wish to be parsed must be contained in the same directory" << endl;
-		cout << "CF does not support #tags containing '\\' or '/' characters" << endl;
-		cout << "CF does not parse #include files referenced by a relative path" << endl;
-		cout << "CF does not support #tags proceeding comments on the same line" << endl;	
-		cout << "CF only supports a single preprocessor statement per line" << endl;	
-		/*cout << "Small (//) comments are ignored immediately after preprocessor definition statements (they are not folded)" << endl;*/
-		cout << "Multiline comments are not supported immediately after preprocessor definition statements (on the same line)" << endl;			
-		cout << "CF requires include/header files that wish to be parsed to to be delimited with " " rather than < >" << endl;
-		cout << "CF requires a single space between #tags and preprocessor variables e.g. #include \"this.h\", #ifdef X, #define Y, etc" << endl;
-		cout << "Ensure that the temp (output) folder is clear of all output files" << endl;
-		cout << "CF does not support \"if defined\" logic (eg multiple if defined statements on a single line)" << endl;
-		cout << "CF requires all files to be the operating system text format (eg UNIX/ASCII)" << endl;	
-		cout << "CF requires all #tags to be properly defined (eg #endif; is illegal)" << endl;
-		cout << "CF does not support external (library) preprocessor defs, eg #ifdef __FREEGLUT_EXT_H__" << endl;
-		cout << "CF requires all relevant preprocessor defs to be defined within the scope (ie necessary preprocessor definitions cannot be inherited from files from which they are being included, they must be defined within their own include file scope)" << endl;
-		cout << "****************************" << endl;
+		cerr << errmessage << endl;
+		cerr << "**** Known Limitations:* ****" << endl;
+		cerr << "all c/cpp and h/hpp files that wish to be parsed must be contained in the same directory" << endl;
+		cerr << "CF does not support #tags containing '\\' or '/' characters" << endl;
+		cerr << "CF does not parse #include files referenced by a relative path" << endl;
+		cerr << "CF does not support #tags proceeding comments on the same line" << endl;
+		cerr << "CF only supports a single preprocessor statement per line" << endl;
+		/*cerr << "Small (//) comments are ignored immediately after preprocessor definition statements (they are not folded)" << endl;*/
+		cerr << "Multiline comments are not supported immediately after preprocessor definition statements (on the same line)" << endl;
+		cerr << "CF requires include/header files that wish to be parsed to to be delimited with " " rather than < >" << endl;
+		cerr << "CF requires a single space between #tags and preprocessor variables e.g. #include \"this.h\", #ifdef X, #define Y, etc" << endl;
+		cerr << "Ensure that the temp (output) folder is clear of all output files" << endl;
+		cerr << "CF does not support \"if defined\" logic (eg multiple if defined statements on a single line)" << endl;
+		cerr << "CF requires all files to be the operating system text format (eg UNIX/ASCII)" << endl;
+		cerr << "CF requires all #tags to be properly defined (eg #endif; is illegal)" << endl;
+		cerr << "CF does not support external (library) preprocessor defs, eg #ifdef __FREEGLUT_EXT_H__" << endl;
+		cerr << "CF requires all relevant preprocessor defs to be defined within the scope (ie necessary preprocessor definitions cannot be inherited from files from which they are being included, they must be defined within their own include file scope)" << endl;
+		cerr << "****************************" << endl;
 		exit(EXIT_ERROR);
 	}
 }
