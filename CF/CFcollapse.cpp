@@ -26,7 +26,7 @@
  * File Name: CFcollapse.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1b1a 11-August-2016
+ * Project Version: 1b1b 11-August-2016
  *
  *******************************************************************************/
 
@@ -157,7 +157,11 @@ bool collapseBlockToFileObject(CFblock* firstBlockInLayer, CFpreprocessorDef* fi
 					passFoldRequirements = true;
 					if(foldSpecific)
 					{
+						#ifdef CF_FOLDSPECIFIC_MATCH_EXACT_STRING
+						if(currentBlockInLayer->hashTagVariableName == foldSpecificBlockNameSubset)
+						#else
 						if((currentBlockInLayer->hashTagVariableName).find(foldSpecificBlockNameSubset) != CPP_STRING_FIND_RESULT_FAIL_VALUE)
+						#endif
 						{
 							passFoldRequirements = false;
 							ifCaseFoundSpecificBlock = true;
@@ -214,7 +218,11 @@ bool collapseBlockToFileObject(CFblock* firstBlockInLayer, CFpreprocessorDef* fi
 					/*
 					if(foldSpecific)
 					{
+						#ifdef CF_FOLDSPECIFIC_MATCH_EXACT_STRING
+						if(currentBlockInLayer->hashTagVariableName == foldSpecificBlockNameSubset)
+						#else
 						if((currentBlockInLayer->hashTagVariableName).find(foldSpecificBlockNameSubset) != CPP_STRING_FIND_RESULT_FAIL_VALUE)
+						#endif
 						{
 							passFoldRequirements = true;
 							//foldSpecificNegative = false;

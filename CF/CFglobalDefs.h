@@ -26,7 +26,7 @@
  * File Name: CFglobalDefs.h
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1b1a 11-August-2016
+ * Project Version: 1b1b 11-August-2016
  *
  *******************************************************************************/
 
@@ -35,6 +35,8 @@
 #define HEADER_CF_GLOBAL_DEFS
 
 #include "SHAREDglobalDefs.h"
+
+//#define CF_FOLDSPECIFIC_MATCH_EXACT_STRING	//1b1b
 
 //#define CF_DEBUG_PARSE
 //#define CF_DEBUG_COLLAPSE
