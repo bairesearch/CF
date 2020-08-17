@@ -24,9 +24,9 @@
 /*******************************************************************************
  *
  * File Name: CFcollapse.h
- * Author: Richard Bruce Baxter - Copyright (c) 2005-2013 Baxter AI (baxterai.com)
+ * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a2a 18-July-2014
+ * Project Version: 1a3a 27-January-2015
  *
  *******************************************************************************/
 
@@ -35,14 +35,14 @@
 
 #include "CFclass.h"
 
-bool collapseFile(CFblock * firstBlockInList, string outputFileName, bool foldInactive, bool foldComments, bool retainPPD);
-	bool collapseBlockToFileObject(CFblock * firstBlockInLayer, CFpreprocessorDef * firstPPDinList, string * outputFileString, int level, bool foldInactive, bool foldComments, bool retainPPD);
-		bool isPPDactive(CFpreprocessorDef * firstPPDinList, string PPD);
-		void PPDdeactivate(CFpreprocessorDef * firstPPDinList, string PPD);
-		void PPDadd(CFpreprocessorDef * firstPPDinList, string PPD);	
-		string reworkCodeBlockHashTag(CFblock * currentBlockInLayer, bool foldComments, bool modifyHashTag, int newHashTagID);
+bool collapseFile(CFblock* firstBlockInList, string outputFileName, bool foldInactive, bool foldComments, bool retainPPD);
+	bool collapseBlockToFileObject(CFblock* firstBlockInLayer, CFpreprocessorDef* firstPPDinList, string* outputFileString, int level, bool foldInactive, bool foldComments, bool retainPPD);
+		bool isPPDactive(CFpreprocessorDef* firstPPDinList, string PPD);
+		void PPDdeactivate(CFpreprocessorDef* firstPPDinList, string PPD);
+		void PPDadd(CFpreprocessorDef* firstPPDinList, string PPD);	
+		string reworkCodeBlockHashTag(CFblock* currentBlockInLayer, bool foldComments, bool modifyHashTag, int newHashTagID);
 			string extractPrependedWhiteSpace(string text);
 		#ifdef CF_SPECIAL_CASE_BLOCK_ALWAYS_RETAIN_TAGS_HEADER_IFNDEF
-		bool isSpecialCaseBlockAlwaysRetainTags(CFblock * currentBlockInLayer);
+		bool isSpecialCaseBlockAlwaysRetainTags(CFblock* currentBlockInLayer);
 		#endif		
 #endif

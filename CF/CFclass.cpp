@@ -24,9 +24,9 @@
 /*******************************************************************************
  *
  * File Name: CFclass.cpp
- * Author: Richard Bruce Baxter - Copyright (c) 2005-2013 Baxter AI (baxterai.com)
+ * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a2a 18-July-2014
+ * Project Version: 1a3a 27-January-2015
  *
  *******************************************************************************/
 
@@ -62,7 +62,7 @@ CFpreprocessorDef::~CFpreprocessorDef(void)
 }
 
 
-int getSupportedHashTagID(string hashTag, string * hashTagArray, int hashTagArraySize)
+int getSupportedHashTagID(string hashTag, string* hashTagArray, int hashTagArraySize)
 {
 	int hashTagID = CF_BLOCK_CASE_TYPE_UNDEFINED;
 	for(int i=0; i< hashTagArraySize; i++)

@@ -24,15 +24,15 @@
 /*******************************************************************************
  *
  * File Name: CFparse.cpp
- * Author: Richard Bruce Baxter - Copyright (c) 2005-2013 Baxter AI (baxterai.com)
+ * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a2a 18-July-2014
+ * Project Version: 1a3a 27-January-2015
  *
  *******************************************************************************/
 
 #include "CFparse.h"
 
-bool parseBlocksFromFile(CFblock * firstBlockInFile, string parseFileName, int level)
+bool parseBlocksFromFile(CFblock* firstBlockInFile, string parseFileName, int level)
 {
 	#ifdef CF_DEBUG_PARSE
 	for(int i=0; i<level; i++)
@@ -78,7 +78,7 @@ bool parseBlocksFromFile(CFblock * firstBlockInFile, string parseFileName, int l
 	return result;
 }
 
-CFblock * parseTextBlock(ifstream * parseFileObject, CFblock * firstBlockInLayer, int level, int * lineCount, bool * returnUponHashTagExitStatement)
+CFblock* parseTextBlock(ifstream* parseFileObject, CFblock* firstBlockInLayer, int level, int* lineCount, bool* returnUponHashTagExitStatement)
 {
 	#ifdef CF_DEBUG_PARSE
 	for(int i=0; i<level; i++)
@@ -89,7 +89,7 @@ CFblock * parseTextBlock(ifstream * parseFileObject, CFblock * firstBlockInLayer
 	#endif
 	bool parsingTextBlock = true;
 	
-	CFblock * currentBlockInLayer = firstBlockInLayer;
+	CFblock* currentBlockInLayer = firstBlockInLayer;
 	
 	char c;
 	int charCount = 0;
@@ -311,7 +311,7 @@ CFblock * parseTextBlock(ifstream * parseFileObject, CFblock * firstBlockInLayer
 				cout << "parseBlocksFromFile() token error:" << endl;
 				cout << "char = " << c << endl;
 				cout << "level = " << level << endl;
-				cout << "*lineCount = " << *lineCount << endl;
+				cout << "*lineCount = " <<* lineCount << endl;
 				cout << "currentLine = " << currentLine << endl;
 				cout << "currentTextBlock = " << currentTextBlock << endl;
 			}
@@ -350,9 +350,9 @@ CFblock * parseTextBlock(ifstream * parseFileObject, CFblock * firstBlockInLayer
 	return currentBlockInLayer;
 }
 
-CFblock * readLargeComment(ifstream * parseFileObject, CFblock * firstBlockInComment, int level, int * lineCount, bool * parsingTextBlock)
+CFblock* readLargeComment(ifstream* parseFileObject, CFblock* firstBlockInComment, int level, int* lineCount, bool* parsingTextBlock)
 {	
-	CFblock * currentBlockInLayer = firstBlockInComment;
+	CFblock* currentBlockInLayer = firstBlockInComment;
 	/*
 	#ifdef CF_DEBUG_PARSE
 	for(int i=0; i<level; i++)
@@ -443,9 +443,9 @@ CFblock * readLargeComment(ifstream * parseFileObject, CFblock * firstBlockInCom
 	return currentBlockInLayer;
 }
 
-CFblock * readSmallComment(ifstream * parseFileObject, CFblock * firstBlockInComment, int level, int * lineCount, bool * parsingTextBlock)
+CFblock* readSmallComment(ifstream* parseFileObject, CFblock* firstBlockInComment, int level, int* lineCount, bool* parsingTextBlock)
 {	
-	CFblock * currentBlockInLayer = firstBlockInComment;
+	CFblock* currentBlockInLayer = firstBlockInComment;
 
 	/*
 	#ifdef CF_DEBUG_PARSE
@@ -497,7 +497,7 @@ CFblock * readSmallComment(ifstream * parseFileObject, CFblock * firstBlockInCom
 	return currentBlockInLayer;
 }
 
-void waitForNewLine(ifstream * parseFileObject, int level, int * lineCount, string * currentLine, string * currentTextBlock, bool writeToTextBlock, bool * parsingTextBlock)
+void waitForNewLine(ifstream* parseFileObject, int level, int* lineCount, string* currentLine, string* currentTextBlock, bool writeToTextBlock, bool* parsingTextBlock)
 {
 	/*
 	#ifdef CF_DEBUG_PARSE
@@ -514,7 +514,7 @@ void waitForNewLine(ifstream * parseFileObject, int level, int * lineCount, stri
 	{
 		if(parseFileObject->get(c))
 		{
-			*currentLine = *currentLine + c;
+			*currentLine =* currentLine + c;
 			#ifdef CF_DEBUG_PARSE
 			cout << c;
 			#endif
@@ -525,7 +525,7 @@ void waitForNewLine(ifstream * parseFileObject, int level, int * lineCount, stri
 				(*lineCount)++;
 				if(writeToTextBlock)
 				{
-					*currentTextBlock = *currentTextBlock + *currentLine;
+					*currentTextBlock =* currentTextBlock +* currentLine;
 					*currentLine = "";
 				}					
 			}
@@ -542,14 +542,14 @@ void waitForNewLine(ifstream * parseFileObject, int level, int * lineCount, stri
 	}
 }
 
-CFblock * processHashTagStatement(ifstream * parseFileObject, CFblock * currentBlockInLayer, int level, int * lineCount, string * currentLine, string * currentTextBlock, string * hashTag, string * hashTagVariableName, bool * returnUponHashTagExitStatement)
+CFblock* processHashTagStatement(ifstream* parseFileObject, CFblock* currentBlockInLayer, int level, int* lineCount, string* currentLine, string* currentTextBlock, string* hashTag, string* hashTagVariableName, bool* returnUponHashTagExitStatement)
 {	
-	CFblock * firstHashTagBlock = new CFblock();
-	CFblock * currentHashTagBlock = firstHashTagBlock;
+	CFblock* firstHashTagBlock = new CFblock();
+	CFblock* currentHashTagBlock = firstHashTagBlock;
 	int hashTagID = getSupportedHashTagID(*hashTag, hashTagArrayAll, CF_HASH_TAG_NUMBER_OF_TYPES);
 	currentHashTagBlock->hashTagID = hashTagID;
-	currentHashTagBlock->hashTag = *hashTag;
-	currentHashTagBlock->text = *currentLine;
+	currentHashTagBlock->hashTag =* hashTag;
+	currentHashTagBlock->text =* currentLine;
 	*currentLine = "";					
 	if(hashTagID == CF_BLOCK_CASE_TYPE_INCLUDE)
 	{
@@ -558,14 +558,14 @@ CFblock * processHashTagStatement(ifstream * parseFileObject, CFblock * currentB
 		{
 			cout << "\t";
 		}
-		cout << "\033[1;35m processHashTagStatement: *hashTag = " << hashTagArrayAll[hashTagID] << ", *hashTagVariableName = " << *hashTagVariableName << " \033[0m" << endl;	//5 = magenta
+		cout << "\033[1;35m processHashTagStatement:* hashTag = " << hashTagArrayAll[hashTagID] << ",* hashTagVariableName = " <<* hashTagVariableName << " \033[0m" << endl;	//5 = magenta
 		#endif	
 		
 		//cout << "go down level (file)" << endl;
 		currentHashTagBlock->type = CF_BLOCK_TYPE_INCLUDE;
-		currentHashTagBlock->hashTagVariableName = *hashTagVariableName;
+		currentHashTagBlock->hashTagVariableName =* hashTagVariableName;
 		
-		string includeFileName = *hashTagVariableName;	
+		string includeFileName =* hashTagVariableName;	
 		includeFileName = removeSpecificCharactersFromString(includeFileName, CHAR_INVERTED_COMMAS);	//removing "" from #include "header.h"
 		includeFileName = removeSpecificCharactersFromString(includeFileName, CHAR_BACKSLASH);	//removing "\" from #include "header.h"	//(NB relative paths in #include defined with a / or a \ indicate that the header h/hpp files not be in the same folder as source c/cpp files - which is not allowed by CF)	
 		includeFileName = removeSpecificCharactersFromString(includeFileName, CHAR_FORWARDSLASH);	//removing "/" from #include "header.h" //(NB relative paths in #include defined with a / or a \ indicate that the header h/hpp files not be in the same folder as source c/cpp files - which is not allowed by CF)	
@@ -587,16 +587,16 @@ CFblock * processHashTagStatement(ifstream * parseFileObject, CFblock * currentB
 			{
 				cout << "\t";
 			}
-			cout << "\033[1;35m processHashTagStatement: *hashTag = " << hashTagArrayAll[hashTagID] << ", *hashTagVariableName = " << *hashTagVariableName << " \033[0m" << endl;	//5 = magenta
+			cout << "\033[1;35m processHashTagStatement:* hashTag = " << hashTagArrayAll[hashTagID] << ",* hashTagVariableName = " <<* hashTagVariableName << " \033[0m" << endl;	//5 = magenta
 			#endif				
 			//cout << "stay" << endl;
-			currentHashTagBlock->hashTagVariableName = *hashTagVariableName;	//will be blank in the case of #else tag
+			currentHashTagBlock->hashTagVariableName =* hashTagVariableName;	//will be blank in the case of #else tag
 		}		
 		else if(getSupportedHashTagID(*hashTag, hashTagArrayExit, CF_HASH_TAG_CASE_EXIT_NUMBER_OF_TYPES) != CF_BLOCK_CASE_TYPE_UNDEFINED)
 		{//#elif defined, #elif !defined, #else, #endif
 			//cout << "go up level" << endl;
 			//exit current codeblock being parsed
-			currentHashTagBlock->hashTagVariableName = *hashTagVariableName;	//will be blank in the case of #else/#endif tags
+			currentHashTagBlock->hashTagVariableName =* hashTagVariableName;	//will be blank in the case of #else/#endif tags
 			*returnUponHashTagExitStatement = true;
 		}
 		else if(getSupportedHashTagID(*hashTag, hashTagArrayEnter, CF_HASH_TAG_CASE_ENTER_NUMBER_OF_TYPES)  != CF_BLOCK_CASE_TYPE_UNDEFINED)
@@ -606,10 +606,10 @@ CFblock * processHashTagStatement(ifstream * parseFileObject, CFblock * currentB
 			{
 				cout << "\t";
 			}
-			cout << "\033[1;35m processHashTagStatement: *hashTag = " << hashTagArrayAll[hashTagID] << ", *hashTagVariableName = " << *hashTagVariableName << " \033[0m" << endl;	//5 = magenta
+			cout << "\033[1;35m processHashTagStatement:* hashTag = " << hashTagArrayAll[hashTagID] << ",* hashTagVariableName = " <<* hashTagVariableName << " \033[0m" << endl;	//5 = magenta
 			#endif			
 			//cout << "go down level" << endl;
-			currentHashTagBlock->hashTagVariableName = *hashTagVariableName;	//will be blank in the case of #else tag
+			currentHashTagBlock->hashTagVariableName =* hashTagVariableName;	//will be blank in the case of #else tag
 			bool endifTagFound = false;
 			while(!endifTagFound)
 			{
@@ -623,7 +623,7 @@ CFblock * processHashTagStatement(ifstream * parseFileObject, CFblock * currentB
 				{
 					cout << "\t";
 				}
-				cout << "\033[1;35m processHashTagStatement: *hashTag = " << hashTagArrayAll[currentHashTagBlock->hashTagID] << ", *hashTagVariableName = " << currentHashTagBlock->hashTagVariableName << " \033[0m" << endl;	//5 = magenta
+				cout << "\033[1;35m processHashTagStatement:* hashTag = " << hashTagArrayAll[currentHashTagBlock->hashTagID] << ",* hashTagVariableName = " << currentHashTagBlock->hashTagVariableName << " \033[0m" << endl;	//5 = magenta
 				#endif					
 				if(ifStatementReturnedUponHashTagExitStatement)
 				{
@@ -635,7 +635,7 @@ CFblock * processHashTagStatement(ifstream * parseFileObject, CFblock * currentB
 				}
 				else
 				{
-					cout << "processHashTagStatement() error: incomplete #ifdef/#ifndef found (no #else):" << *hashTag << " " << *hashTagVariableName << "line=" << *lineCount << endl;
+					cout << "processHashTagStatement() error: incomplete #ifdef/#ifndef found (no #else):" <<* hashTag << " " <<* hashTagVariableName << "line=" <<* lineCount << endl;
 				}
 			
 			}
@@ -656,7 +656,7 @@ CFblock * processHashTagStatement(ifstream * parseFileObject, CFblock * currentB
 	if(*returnUponHashTagExitStatement)
 	{
 		//add the currently stored text block which contains data from the previous line(s) [note if the previous line was a #tag statement, the currentTextBlock is probably empty]					
-		currentBlockInLayer->text = *currentTextBlock;
+		currentBlockInLayer->text =* currentTextBlock;
 		*currentTextBlock = "";
 		currentBlockInLayer->next = new CFblock();
 		return currentHashTagBlock;
@@ -664,7 +664,7 @@ CFblock * processHashTagStatement(ifstream * parseFileObject, CFblock * currentB
 	else
 	{
 		//add the currently stored text block which contains data from the previous line(s) [note if the previous line was a #tag statement, the currentTextBlock is probably empty]					
-		currentBlockInLayer->text = *currentTextBlock;
+		currentBlockInLayer->text =* currentTextBlock;
 		*currentTextBlock = "";
 		currentBlockInLayer->next = firstHashTagBlock;
 		currentHashTagBlock->next = new CFblock();

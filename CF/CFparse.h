@@ -24,9 +24,9 @@
 /*******************************************************************************
  *
  * File Name: CFparse.h
- * Author: Richard Bruce Baxter - Copyright (c) 2005-2013 Baxter AI (baxterai.com)
+ * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a2a 18-July-2014
+ * Project Version: 1a3a 27-January-2015
  *
  *******************************************************************************/
 
@@ -35,12 +35,12 @@
 
 #include "CFclass.h"
 
-bool parseBlocksFromFile(CFblock * firstBlockInFile, string parseFileName, int level);
-	CFblock * parseTextBlock(ifstream * parseFileObject, CFblock * firstBlockInLayer, int level, int * lineCount, bool * returnUponHashTagExitStatement);
-		CFblock * readLargeComment(ifstream * parseFileObject, CFblock * firstBlockInComment, int level, int * lineCount, bool * parsingTextBlock);
-		CFblock * readSmallComment(ifstream * parseFileObject, CFblock * firstBlockInComment, int level, int * lineCount, bool * parsingTextBlock);
-		void waitForNewLine(ifstream * parseFileObject, int level, int * lineCount, string * currentLine, string * currentTextBlock, bool writeToTextBlock, bool * parsingTextBlock);
-		CFblock * processHashTagStatement(ifstream * parseFileObject, CFblock * currentBlockInLayer, int level, int * lineCount, string * currentLine, string * currentTextBlock, string * hashTag, string * hashTagVariableName, bool * returnUponHashTagExitStatement);
+bool parseBlocksFromFile(CFblock* firstBlockInFile, string parseFileName, int level);
+	CFblock* parseTextBlock(ifstream* parseFileObject, CFblock* firstBlockInLayer, int level, int* lineCount, bool* returnUponHashTagExitStatement);
+		CFblock* readLargeComment(ifstream* parseFileObject, CFblock* firstBlockInComment, int level, int* lineCount, bool* parsingTextBlock);
+		CFblock* readSmallComment(ifstream* parseFileObject, CFblock* firstBlockInComment, int level, int* lineCount, bool* parsingTextBlock);
+		void waitForNewLine(ifstream* parseFileObject, int level, int* lineCount, string* currentLine, string* currentTextBlock, bool writeToTextBlock, bool* parsingTextBlock);
+		CFblock* processHashTagStatement(ifstream* parseFileObject, CFblock* currentBlockInLayer, int level, int* lineCount, string* currentLine, string* currentTextBlock, string* hashTag, string* hashTagVariableName, bool* returnUponHashTagExitStatement);
 
 		string removeLastCharactersFromString(string str, int numberOfCharactersToRemove);
 		string removeSpecificCharactersFromString(string str, char characterToRemove);

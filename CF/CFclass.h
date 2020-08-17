@@ -24,9 +24,9 @@
 /*******************************************************************************
  *
  * File Name: CFclass.h
- * Author: Richard Bruce Baxter - Copyright (c) 2005-2013 Baxter AI (baxterai.com)
+ * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a2a 18-July-2014
+ * Project Version: 1a3a 27-January-2015
  *
  *******************************************************************************/
 
@@ -114,8 +114,8 @@ public:
 	string hashTagVariableName;	//only used if type == CF_BLOCK_TYPE_CASE / CF_BLOCK_TYPE_INCLUDE
 	int commentType;
 	 
-	CFblock * next;
-	CFblock * lower;
+	CFblock* next;
+	CFblock* lower;
 };
 
 class CFpreprocessorDef{
@@ -129,10 +129,10 @@ public:
 	string name;
 	bool active;
 	 
-	CFpreprocessorDef * next;
+	CFpreprocessorDef* next;
 };
 
-int getSupportedHashTagID(string hashTag, string * hashTagArray, int hashTagArraySize);
-string convertStringToLowerCase(string * arbitraryCaseString);
+int getSupportedHashTagID(string hashTag, string* hashTagArray, int hashTagArraySize);
+string convertStringToLowerCase(string* arbitraryCaseString);
 
 #endif

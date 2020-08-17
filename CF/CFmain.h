@@ -24,9 +24,9 @@
 /*******************************************************************************
  *
  * File Name: CFmain.h
- * Author: Richard Bruce Baxter - Copyright (c) 2005-2013 Baxter AI (baxterai.com)
+ * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a2a 18-July-2014
+ * Project Version: 1a3a 27-January-2015
  *
  *******************************************************************************/
 
@@ -35,6 +35,6 @@
 
 #include "CFglobalDefs.h"
 
-int main(int argc,char **argv);
+int main(int argc,char* *argv);
 
 #endif

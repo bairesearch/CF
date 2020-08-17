@@ -24,9 +24,9 @@
 /*******************************************************************************
  *
  * File Name: CFmain.cpp
- * Author: Richard Bruce Baxter - Copyright (c) 2005-2013 Baxter AI (baxterai.com)
+ * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a2a 18-July-2014
+ * Project Version: 1a3a 27-January-2015
  *
  *******************************************************************************/
 
@@ -63,7 +63,7 @@ static char errmessage[] = "Usage:  OpenCF.exe [options]"
 
 
 		
-int main(int argc,char **argv)
+int main(int argc,char* *argv)
 {
 	bool result = false;
 	
@@ -127,7 +127,7 @@ int main(int argc,char **argv)
 				
 		if(argumentExists(argc,argv,"-version"))
 		{
-			cout << "OpenCF.exe - Project Version: 1a2a 18-July-2014" << endl;
+			cout << "OpenCF.exe - Project Version: 1a3a 27-January-2015" << endl;
 			exit(1);
 		}
 	}
@@ -140,8 +140,8 @@ int main(int argc,char **argv)
 		#endif		
 		for(vector<string>::iterator connectionIter = inputFileNamesVector.begin(); connectionIter != inputFileNamesVector.end(); connectionIter++)
 		{
-			CFblock * firstBlockInList = new CFblock();
-			string fileName = *connectionIter;
+			CFblock* firstBlockInList = new CFblock();
+			string fileName =* connectionIter;
 			cout << "fileName = " << fileName << endl;
 			changeDirectoryString(workingFolder);
 			#ifdef CF_DEBUG_PARSE
@@ -164,7 +164,7 @@ int main(int argc,char **argv)
 	else
 	{
 		printf(errmessage);
-		cout << "**** Known Limitations: *****" << endl;
+		cout << "**** Known Limitations:* ****" << endl;
 		cout << "all c/cpp and h/hpp files that wish to be parsed must be contained in the same directory" << endl;
 		cout << "CF does not support #tags containing '\\' or '/' characters" << endl;
 		cout << "CF does not parse #include files referenced by a relative path" << endl;
