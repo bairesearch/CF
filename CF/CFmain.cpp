@@ -26,9 +26,10 @@
  * File Name: CFmain.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a3a 27-January-2015
+ * Project Version: 1a3b 27-January-2015
  *
  *******************************************************************************/
+
 
 #include "CFmain.h"
 #include "CFparse.h"
@@ -127,7 +128,7 @@ int main(int argc,char* *argv)
 				
 		if(argumentExists(argc,argv,"-version"))
 		{
-			cout << "OpenCF.exe - Project Version: 1a3a 27-January-2015" << endl;
+			cout << "OpenCF.exe - Project Version: 1a3b 27-January-2015" << endl;
 			exit(1);
 		}
 	}

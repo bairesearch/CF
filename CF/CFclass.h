@@ -26,26 +26,16 @@
  * File Name: CFclass.h
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a3a 27-January-2015
+ * Project Version: 1a3b 27-January-2015
  *
  *******************************************************************************/
+
 
 #ifndef HEADER_CF_CLASS
 #define HEADER_CF_CLASS
 
 #include "CFglobalDefs.h"
 #include "SHAREDvars.h"	//required for isWhiteSpace and convertStringToLowerCase
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string>
-#include <string.h>
-#include <iostream>
-#include <fstream>
-#include <ctime>
-#include <cmath>
-#include <vector>
-using namespace std;
 
 #define CF_BLOCK_TYPE_UNDEFINED (0)
 #define CF_BLOCK_TYPE_COMMENT (1)
