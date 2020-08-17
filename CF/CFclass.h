@@ -26,7 +26,7 @@
  * File Name: CFclass.h
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a4a 10-July-2015
+ * Project Version: 1b1a 11-August-2016
  *
  *******************************************************************************/
 

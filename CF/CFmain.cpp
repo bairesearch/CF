@@ -26,7 +26,7 @@
  * File Name: CFmain.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a4a 10-July-2015
+ * Project Version: 1b1a 11-August-2016
  *
  *******************************************************************************/
 
@@ -46,13 +46,14 @@ static char errmessage[] = "Usage:  OpenCF.exe [options]"
 "\n"
 "\n\twhere options are any of the following"
 "\n"
-"\n\t-i [string]             : list of input files to be folded (eg PROJECT*.cpp PROJECT*.h main.cpp main.h operations.cpp operations.h)"
-"\n\t-foldComments           : fold comments"
-"\n\t-foldInactive           : fold inactive code blocks based on preprocessor definitions"
-"\n\t-retainPPD              : retain code block preprocessor definitions when folding"
+"\n\t-i [string]                     : list of input files to be folded (eg PROJECT*.cpp PROJECT*.h main.cpp main.h operations.cpp operations.h)"
+"\n\t-foldComments                   : fold comments"
+"\n\t-foldInactive                   : fold inactive code blocks based on preprocessor definitions"
+"\n\t-foldSpecific [string]  : fold specific inactive code blocks based on preprocessor definitions"
+"\n\t-retainPPD                      : retain code block preprocessor definitions when folding"
 "\n"
 "\n\t-workingfolder [string] : working directory name for input files (def: same as exe)"
-/*"\n\t-exefolder [string]     : exe directory name for executables OpenCF.exe and (def: same as exe)"*/
+/*"\n\t-exefolder [string]     : exe directory name for executables; OpenCF.exe (def: same as exe)"*/
 "\n\t-tempfolder [string]    : temp directory name for temporary and output files (def: same as exe/output)"
 "\n"
 "\n\t-version                : print version"
@@ -64,12 +65,14 @@ static char errmessage[] = "Usage:  OpenCF.exe [options]"
 
 
 		
-int main(int argc,char* *argv)
+int main(int argc, char** argv)
 {
 	bool result = false;
 	
 	bool foldComments = false;
 	bool foldInactive = false;
+	bool foldSpecific = false;
+	string foldSpecificBlockNameSubset = "";	//eg "DEBUG"
 	bool retainPPD = false;
 		
 	bool passInputReq = false;
@@ -93,12 +96,17 @@ int main(int argc,char* *argv)
 		{
 			foldInactive = true;
 		}
+		if(argumentExists(argc, argv, string("-foldSpecific")))
+		{
+			foldSpecific = true;
+			foldSpecificBlockNameSubset = getStringArgument(argc, argv, string("-foldSpecific"));
+		}
 		if(argumentExists(argc, argv, string("-retainPPD")))
 		{
 			retainPPD = true;
 		}
 				
-		string currentFolder = getCurrentDirectoryString();	
+		string currentFolder = getCurrentDirectory();	
 		if(argumentExists(argc, argv, string("-workingfolder")))
 		{
 			workingFolder = getStringArgument(argc, argv, string("-workingfolder"));
@@ -128,7 +136,7 @@ int main(int argc,char* *argv)
 				
 		if(argumentExists(argc,argv,"-version"))
 		{
-			cout << "OpenCF.exe - Project Version: 1a4a 10-July-2015" << endl;
+			cout << "OpenCF.exe - Project Version: 1b1a 11-August-2016" << endl;
 			exit(1);
 		}
 	}
@@ -156,7 +164,7 @@ int main(int argc,char* *argv)
 			cout << "main: collapseFile()" << endl;
 			#endif
 			changeDirectory(tempFolder);			
-			if(collapseFile(firstBlockInList, fileName, foldInactive, foldComments, retainPPD))
+			if(collapseFile(firstBlockInList, fileName, foldInactive, foldComments, retainPPD, foldSpecific, foldSpecificBlockNameSubset))
 			{
 				result = false;
 			}

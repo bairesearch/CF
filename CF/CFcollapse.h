@@ -26,7 +26,7 @@
  * File Name: CFcollapse.h
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2015 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a4a 10-July-2015
+ * Project Version: 1b1a 11-August-2016
  *
  *******************************************************************************/
 
@@ -36,8 +36,9 @@
 
 #include "CFclass.h"
 
-bool collapseFile(CFblock* firstBlockInList, string outputFileName, bool foldInactive, bool foldComments, bool retainPPD);
-	bool collapseBlockToFileObject(CFblock* firstBlockInLayer, CFpreprocessorDef* firstPPDinList, string* outputFileString, int level, bool foldInactive, bool foldComments, bool retainPPD);
+bool collapseFile(CFblock* firstBlockInList, string outputFileName, bool foldInactive, bool foldComments, bool retainPPD, bool foldSpecific, string foldSpecificBlockNameSubset);
+	bool collapseBlockToFileObject(CFblock* firstBlockInLayer, CFpreprocessorDef* firstPPDinList, string* outputFileString, int level, bool foldInactive, bool foldComments, bool retainPPD, bool foldSpecific, string foldSpecificBlockNameSubset);
+		void updateCodeBlock(string* outputFileString, CFblock* currentBlockInLayer, bool foldInactive, bool foldComments, bool retainPPD, bool foldSpecific, bool ifCaseStillTrying, bool ifCaseFoundSpecificBlock, string retainPPDelseStatementTagVariableName, int originalBlockCase, int replacementBlockCase);
 		bool isPPDactive(CFpreprocessorDef* firstPPDinList, string PPD);
 		void PPDdeactivate(CFpreprocessorDef* firstPPDinList, string PPD);
 		void PPDadd(CFpreprocessorDef* firstPPDinList, string PPD);	
