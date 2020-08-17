@@ -4,7 +4,10 @@
  * 
  * BAIPROJECT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License version 3
- * only, as published by the Free Software Foundation.
+ * only, as published by the Free Software Foundation. The use of
+ * intermediary programs or interfaces including file i/o is considered
+ * remote network interaction. This does not imply such arrangements
+ * do not constitute derivative works.
  * 
  * BAIPROJECT is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,7 +26,7 @@
  * File Name: CFmain.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2013 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a1b 22-July-2013
+ * Project Version: 1a2a 18-July-2014
  *
  *******************************************************************************/
 
@@ -94,7 +97,7 @@ int main(int argc,char **argv)
 			retainPPD = true;
 		}
 				
-		string currentFolder = getCurrentDirectory();	
+		string currentFolder = getCurrentDirectoryString();	
 		if(argumentExists(argc, argv, string("-workingfolder")))
 		{
 			workingFolder = getStringArgument(argc, argv, string("-workingfolder"));
@@ -124,7 +127,7 @@ int main(int argc,char **argv)
 				
 		if(argumentExists(argc,argv,"-version"))
 		{
-			cout << "OpenCF.exe - Project Version: 1a1b 22-July-2013" << endl;
+			cout << "OpenCF.exe - Project Version: 1a2a 18-July-2014" << endl;
 			exit(1);
 		}
 	}
@@ -140,7 +143,7 @@ int main(int argc,char **argv)
 			CFblock * firstBlockInList = new CFblock();
 			string fileName = *connectionIter;
 			cout << "fileName = " << fileName << endl;
-			changeDirectory(workingFolder);
+			changeDirectoryString(workingFolder);
 			#ifdef CF_DEBUG_PARSE
 			cout << "main: parseBlocksFromFile()" << endl;			
 			#endif
@@ -151,7 +154,7 @@ int main(int argc,char **argv)
 			#ifdef CF_DEBUG_PARSE
 			cout << "main: collapseFile()" << endl;
 			#endif
-			changeDirectory(tempFolder);			
+			changeDirectoryString(tempFolder);			
 			if(collapseFile(firstBlockInList, fileName, foldInactive, foldComments, retainPPD))
 			{
 				result = false;

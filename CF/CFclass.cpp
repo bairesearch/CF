@@ -4,7 +4,10 @@
  * 
  * BAIPROJECT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License version 3
- * only, as published by the Free Software Foundation.
+ * only, as published by the Free Software Foundation. The use of
+ * intermediary programs or interfaces including file i/o is considered
+ * remote network interaction. This does not imply such arrangements
+ * do not constitute derivative works.
  * 
  * BAIPROJECT is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,7 +26,7 @@
  * File Name: CFclass.cpp
  * Author: Richard Bruce Baxter - Copyright (c) 2005-2013 Baxter AI (baxterai.com)
  * Project: Code Folder
- * Project Version: 1a1b 22-July-2013
+ * Project Version: 1a2a 18-July-2014
  *
  *******************************************************************************/
 
@@ -58,16 +61,6 @@ CFpreprocessorDef::~CFpreprocessorDef(void)
 {
 }
 
-bool isWhiteSpace(char c)
-{
-	bool result = false;
-	if((c == CHAR_SPACE) || (c == CHAR_TAB))
-	{
-		result = true;
-	}
-	return result;
-}
-
 
 int getSupportedHashTagID(string hashTag, string * hashTagArray, int hashTagArraySize)
 {
@@ -81,16 +74,6 @@ int getSupportedHashTagID(string hashTag, string * hashTagArray, int hashTagArra
 	}
 	
 	return hashTagID;
-}
-
-string convertStringToLowerCase(string * arbitraryCaseString)
-{
-	string lowerCaseString = *arbitraryCaseString;
-	for(int i=0; i<arbitraryCaseString->length(); i++)
-	{
-		lowerCaseString[i] = tolower((*arbitraryCaseString)[i]);
-	}
-	return lowerCaseString;
 }
 
 
